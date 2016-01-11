@@ -112,8 +112,8 @@ public class Cluster extends SubCommand {
                     return false;
                 }
                 // check pos1 / pos2
-                PlotId pos1 = MainUtil.parseId(args[2]);
-                PlotId pos2 = MainUtil.parseId(args[3]);
+                PlotId pos1 = PlotId.fromString(args[2]);
+                PlotId pos2 = PlotId.fromString(args[3]);
                 if ((pos1 == null) || (pos2 == null)) {
                     MainUtil.sendMessage(plr, C.NOT_VALID_PLOT_ID);
                     return false;
@@ -249,7 +249,7 @@ public class Cluster extends SubCommand {
                         return false;
                     }
                 }
-                final PlotWorld plotworld = PS.get().getPlotWorld(plr.getLocation().getWorld());
+                final PlotWorld plotworld = plr.getLocation().getPlotWorld();
                 if (plotworld.TYPE == 2) {
                     final ArrayList<Plot> toRemove = new ArrayList<>();
                     for (final Plot plot : PS.get().getPlotsInWorld(plr.getLocation().getWorld())) {
@@ -283,8 +283,8 @@ public class Cluster extends SubCommand {
                     return false;
                 }
                 // check pos1 / pos2
-                PlotId pos1 = MainUtil.parseId(args[1]);
-                PlotId pos2 = MainUtil.parseId(args[2]);
+                PlotId pos1 = PlotId.fromString(args[1]);
+                PlotId pos2 = PlotId.fromString(args[2]);
                 if ((pos1 == null) || (pos2 == null)) {
                     MainUtil.sendMessage(plr, C.NOT_VALID_PLOT_ID);
                     return false;

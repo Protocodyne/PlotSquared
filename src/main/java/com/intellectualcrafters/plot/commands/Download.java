@@ -46,9 +46,9 @@ public class Download extends SubCommand {
             MainUtil.sendMessage(plr, C.WAIT_FOR_TIMER);
             return false;
         }
-        MainUtil.runners.put(plot, 1);
+        plot.addRunning();
         MainUtil.sendMessage(plr, C.GENERATING_LINK);
-        SchematicHandler.manager.getCompoundTag(plot.world, plot.id, new RunnableVal<CompoundTag>() {
+        SchematicHandler.manager.getCompoundTag(plot.world, plot.getId(), new RunnableVal<CompoundTag>() {
             @Override
             public void run() {
                 TaskManager.runTaskAsync(new Runnable() {
@@ -57,11 +57,11 @@ public class Download extends SubCommand {
                         final URL url = SchematicHandler.manager.upload(value, null, null);
                         if (url == null) {
                             MainUtil.sendMessage(plr, C.GENERATING_LINK_FAILED);
-                            MainUtil.runners.remove(plot);
+                            plot.removeRunning();
                             return;
                         }
                         MainUtil.sendMessage(plr, url.toString());
-                        MainUtil.runners.remove(plot);
+                        plot.removeRunning();
                     }
                 });
             }

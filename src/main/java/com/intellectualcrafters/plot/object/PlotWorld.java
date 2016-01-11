@@ -20,11 +20,6 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 package com.intellectualcrafters.plot.object;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Set;
-
 import com.intellectualcrafters.configuration.ConfigurationSection;
 import com.intellectualcrafters.plot.PS;
 import com.intellectualcrafters.plot.config.Configuration;
@@ -35,6 +30,11 @@ import com.intellectualcrafters.plot.flag.FlagManager;
 import com.intellectualcrafters.plot.util.EconHandler;
 import com.intellectualcrafters.plot.util.PlotGamemode;
 import com.intellectualcrafters.plot.util.StringMan;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Set;
 
 /**
  * @author Jesse Boyd
@@ -53,8 +53,6 @@ public abstract class PlotWorld {
     public final static double PLOT_PRICE_DEFAULT = 100;
     public final static double MERGE_PRICE_DEFAULT = 100;
     public final static double SELL_PRICE_DEFAULT = 75;
-    public final static boolean PVP_DEFAULT = false;
-    public final static boolean PVE_DEFAULT = false;
     public final static boolean SPAWN_EGGS_DEFAULT = false;
     public final static boolean SPAWN_CUSTOM_DEFAULT = true;
     public final static boolean SPAWN_BREEDING_DEFAULT = false;
@@ -80,8 +78,6 @@ public abstract class PlotWorld {
     public double PLOT_PRICE;
     public double MERGE_PRICE;
     public double SELL_PRICE;
-    public boolean PVP;
-    public boolean PVE;
     public boolean SPAWN_EGGS;
     public boolean SPAWN_CUSTOM;
     public boolean SPAWN_BREEDING;
@@ -202,7 +198,7 @@ public abstract class PlotWorld {
         if ((flags == null) || (flags.size() == 0)) {
             flags = config.getStringList("flags");
             if ((flags == null) || (flags.size() == 0)) {
-                flags = new ArrayList<String>();
+                flags = new ArrayList<>();
                 final ConfigurationSection section = config.getConfigurationSection("flags");
                 final Set<String> keys = section.getKeys(false);
                 for (final String key : keys) {
@@ -219,8 +215,6 @@ public abstract class PlotWorld {
             PS.debug("&cInvalid default flags for " + worldname + ": " + StringMan.join(flags, ","));
             DEFAULT_FLAGS = new HashMap<>();
         }
-        PVP = config.getBoolean("event.pvp");
-        PVE = config.getBoolean("event.pve");
         SPAWN_EGGS = config.getBoolean("event.spawn.egg");
         SPAWN_CUSTOM = config.getBoolean("event.spawn.custom");
         SPAWN_BREEDING = config.getBoolean("event.spawn.breeding");
@@ -239,7 +233,7 @@ public abstract class PlotWorld {
         options.put("natural_mob_spawning", PlotWorld.MOB_SPAWNING_DEFAULT);
         options.put("plot.auto_merge", PlotWorld.AUTO_MERGE_DEFAULT);
         options.put("plot.create_signs", PlotWorld.ALLOW_SIGNS_DEFAULT);
-        options.put("plot.biome", PlotWorld.PLOT_BIOME_DEFAULT.toString());
+        options.put("plot.biome", PlotWorld.PLOT_BIOME_DEFAULT);
         options.put("schematic.on_claim", PlotWorld.SCHEMATIC_ON_CLAIM_DEFAULT);
         options.put("schematic.file", PlotWorld.SCHEMATIC_FILE_DEFAULT);
         options.put("schematic.specify_on_claim", PlotWorld.SCHEMATIC_CLAIM_SPECIFY_DEFAULT);
@@ -250,8 +244,6 @@ public abstract class PlotWorld {
         options.put("economy.prices.sell", PlotWorld.SELL_PRICE_DEFAULT);
         options.put("chat.enabled", PlotWorld.PLOT_CHAT_DEFAULT);
         options.put("flags.default", null);
-        options.put("event.pvp", PlotWorld.PVP_DEFAULT);
-        options.put("event.pve", PlotWorld.PVE_DEFAULT);
         options.put("event.spawn.egg", PlotWorld.SPAWN_EGGS_DEFAULT);
         options.put("event.spawn.custom", PlotWorld.SPAWN_CUSTOM_DEFAULT);
         options.put("event.spawn.breeding", PlotWorld.SPAWN_BREEDING_DEFAULT);
@@ -284,6 +276,11 @@ public abstract class PlotWorld {
         }
     }
     
+    @Override
+    public String toString() {
+        return worldname;
+    }
+
     /**
      * Used for the <b>/plot setup</b> command Return null if you do not want to support this feature
      *

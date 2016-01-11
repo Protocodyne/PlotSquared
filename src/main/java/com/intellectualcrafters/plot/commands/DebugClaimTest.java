@@ -44,7 +44,7 @@ import com.plotsquared.general.commands.CommandDeclaration;
 
 @CommandDeclaration(
 command = "debugclaimtest",
-description = "If you accidentally delete your database, this command will attempt to restore all plots based on the data from plot sighs. Execution time may vary",
+description = "If you accidentally delete your database, this command will attempt to restore all plots based on the data from plot signs. Execution time may vary",
 category = CommandCategory.DEBUG,
 requiredType = RequiredType.CONSOLE,
 permission = "plots.debugclaimtest")
@@ -96,8 +96,8 @@ public class DebugClaimTest extends SubCommand {
         final ArrayList<Plot> plots = new ArrayList<>();
         for (final PlotId id : MainUtil.getPlotSelectionIds(min, max)) {
             final Plot plot = MainUtil.getPlotAbs(world, id);
-            if (PS.get().getPlot(world, plot.id) != null) {
-                MainUtil.sendMessage(plr, " - &cDB Already contains: " + plot.id);
+            if (PS.get().getPlot(world, plot.getId()) != null) {
+                MainUtil.sendMessage(plr, " - &cDB Already contains: " + plot.getId());
                 continue;
             }
             final Location loc = manager.getSignLoc(plotworld, plot);
@@ -125,11 +125,11 @@ public class DebugClaimTest extends SubCommand {
                         uuid = UUIDHandler.getUUID(line, null);
                     }
                     if (uuid != null) {
-                        MainUtil.sendMessage(plr, " - &aFound plot: " + plot.id + " : " + line);
+                        MainUtil.sendMessage(plr, " - &aFound plot: " + plot.getId() + " : " + line);
                         plot.owner = uuid;
                         plots.add(plot);
                     } else {
-                        MainUtil.sendMessage(plr, " - &cInvalid playername: " + plot.id + " : " + line);
+                        MainUtil.sendMessage(plr, " - &cInvalid playername: " + plot.getId() + " : " + line);
                     }
                 }
             }

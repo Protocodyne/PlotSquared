@@ -30,6 +30,7 @@ import java.util.List;
 public class Settings {
     public static boolean USE_SQLUUIDHANDLER = false;
     
+    public static boolean AUTO_PURGE = false;
     /**
      * 
      */
@@ -37,6 +38,7 @@ public class Settings {
 
     public static boolean ENABLE_CLUSTERS = false;
     public static boolean FAST_CLEAR = false;
+    public static boolean MERGE_REMOVES_ROADS = true;
     /**
      * Default UUID_FECTHING: false
      */

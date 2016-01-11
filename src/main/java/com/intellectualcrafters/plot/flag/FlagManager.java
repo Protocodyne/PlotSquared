@@ -41,7 +41,9 @@ import com.intellectualcrafters.plot.util.Permissions;
 
 /**
  * Flag Manager Utility
- *
+ *
+
+
  */
 @SuppressWarnings("unused")
 public class FlagManager {
@@ -210,7 +212,7 @@ public class FlagManager {
     
     /**
      * Add a flag to a plot
-     * @param plot
+     * @param origin
      * @param flag
      */
     public static boolean addPlotFlag(final Plot origin, final Flag flag) {
@@ -413,8 +415,7 @@ public class FlagManager {
      */
     public static AbstractFlag getFlag(final String string, final boolean create) {
         if ((getFlag(string) == null) && create) {
-            final AbstractFlag flag = new AbstractFlag(string);
-            return flag;
+            return new AbstractFlag(string);
         }
         return getFlag(string);
     }
@@ -431,7 +432,7 @@ public class FlagManager {
     }
     
     public static HashMap<String, Flag> parseFlags(final List<String> flagstrings) {
-        final HashMap<String, Flag> map = new HashMap<String, Flag>();
+        final HashMap<String, Flag> map = new HashMap<>();
         for (final String key : flagstrings) {
             final String[] split;
             if (key.contains(";")) {
